@@ -6,3 +6,25 @@
 // ===============
 
 process.env.PORT = process.env.PORT || 3000; //si existe la coge (existirá por ejemplo cuando corra en heroku) y si no pone el 3000 por defecto
+
+
+// ==============
+// Entorno
+// ==============
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
+//La variable NODE_ENV la establece Heroku
+
+// ==============
+// Base de datos
+// ==============
+
+let urlDB;
+
+if (process.env.NODE_ENV === 'dev') {
+    urlDB = 'mongodb://localhost:27017/cafe';
+} else {
+    urlDB = 'mongodb+srv://adminAtlas:PvAPjEcJcrKpb1Ki@cluster0-curso-node-ogwkt.mongodb.net/cafe';
+}
+
+process.env.URLDB = urlDB;
