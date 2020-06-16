@@ -43,3 +43,17 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 process.env.URLDB = urlDB;
+
+// ==============
+// Fecha de expiración del token
+// ==============
+// 60 s *60 min *24 h *30 días
+
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+
+// ==============
+// Semilla del token
+// ==============
+
+process.env.SEED = process.env.SEED || 'este-es-el-seed-desarrollo';
+//Se define en keroku la semilla, en caso de estar en local es el string

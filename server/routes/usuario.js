@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 const Usuario = require('../models/usuario');
+const { verificaToken, verificaTokenAdmin_ROle } = require('../middlewares/authentication');
 
 const bcrypt = require('bcrypt');
 
@@ -17,7 +18,7 @@ const _ = require('underscore');
  suele cambiar un estado de una variable o similar 
  para que dicho registro no esté disponible */
 
-app.get('/usuario', function(req, res) {
+app.get('/usuario', verificaToken, function(req, res) {
     //Buscamos varios usuarios con la condición definida en find y exec ejecuta la búsqueda
     //si no se indica nada, se cogen todos los usuarios
     let desde = req.query.desde || 0; //si no se encuentra en el parámetro de entrada es 0
@@ -44,7 +45,7 @@ app.get('/usuario', function(req, res) {
         })
 })
 
-app.post('/usuario', function(req, res) { //nuevo usuario
+app.post('/usuario', [verificaToken, verificaTokenAdmin_ROle], function(req, res) { //nuevo usuario
     let body = req.body;
     /*Ese objeto es el que el body-parser va a procesar
     cuando se reciba una petición. En el postman se manda el body
@@ -82,7 +83,7 @@ app.post('/usuario', function(req, res) { //nuevo usuario
     // }
 })
 
-app.put('/usuario/:id', function(req, res) { //actualizar usuario, :id es el parámetro a recibir
+app.put('/usuario/:id', [verificaToken, verificaTokenAdmin_ROle], function(req, res) { //actualizar usuario, :id es el parámetro a recibir
     let id = req.params.id; // es el id de :id, de la cabecera
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']); //_ es underscore, pick es para seleccionar del objeto sólo aquellos parámetros pasados como argumento a esta función
 
@@ -103,7 +104,7 @@ app.put('/usuario/:id', function(req, res) { //actualizar usuario, :id es el par
     })
 })
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken, verificaTokenAdmin_ROle], function(req, res) {
     let borradoFisico = req.body.borradoFisico;
     if (borradoFisico == 'false') {
         borradoFisico = false;
