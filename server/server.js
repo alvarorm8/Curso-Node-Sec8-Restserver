@@ -4,6 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose'); //conexión a la base de datos mongo
 
+const path = require('path'); //se usa para habilitar la carpeta public
+
 const app = express();
 
 // parse application/x-www-form-urlencoded
@@ -11,6 +13,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
+
+// Habilitar la carpeta public para que sea accesible desde cualquier lugar
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 //Configuración global de rutas
 app.use(require('./routes/index'));

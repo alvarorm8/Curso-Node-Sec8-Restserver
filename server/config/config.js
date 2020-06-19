@@ -57,3 +57,9 @@ process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
 
 process.env.SEED = process.env.SEED || 'este-es-el-seed-desarrollo';
 //Se define en keroku la semilla, en caso de estar en local es el string
+
+// ==============
+// Google client ID
+// ==============
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '652429018115-vuc1tv706vu4btd5830knmeo4kek50p7.apps.googleusercontent.com';
