@@ -1,3 +1,7 @@
+/*En este proyecto tenemos 2 tipos de token. El primero es el token que generamos nosotros para las peticiones de Usuario y Categoria. El otro tipo es el que tiene que ver con el 
+inicio de sesión con google. En el postman para tener el token actualizado tenemos que ejecutar las peticiones Login: normal (cuando queremos por ejemplo crear un nuevo usuario)
+y Login: google cuando queremos hacer el inicio de sesión con google. En ambos casos, la variable de entorno de postman se actualiza por el código puesto en el campo Tests del postman. */
+
 require('./config/config');
 
 const express = require('express');
