@@ -35,7 +35,7 @@ app.get('/usuario', verificaToken, function(req, res) {
                     err
                 });
             }
-            Usuario.count({ estado: true }, (err, conteo) => { //debe tener entre {} la misma condición que find
+            Usuario.countDocuments({ estado: true }, (err, conteo) => { //debe tener entre {} la misma condición que find
                 res.json({
                     ok: true,
                     usuarios,
